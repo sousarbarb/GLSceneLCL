@@ -54,7 +54,6 @@ interface
 uses
   Classes,
   SysUtils,
-   cene
   GLODEManager,
   ODEGL,
   ODEImport,

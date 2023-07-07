@@ -171,8 +171,10 @@ end;
 {$IFDEF Unix}
 uses
 {$IFDEF UNIX}
+  dl,
   Types,
-  Libc;
+  Baseunix,
+  Unix;
 {$else}
   dl,
   Types,
@@ -194,6 +196,10 @@ function GetModuleSymbol(Module: TModuleHandle; SymbolName: PChar): Pointer;
 function GetModuleSymbolEx(Module: TModuleHandle; SymbolName: PChar; var Accu: Boolean): Pointer;
 function ReadModuleData(Module: TModuleHandle; SymbolName: PChar; var Buffer; Size: Cardinal): Boolean;
 function WriteModuleData(Module: TModuleHandle; SymbolName: PChar; var Buffer; Size: Cardinal): Boolean;
+
+function dlopen ( Name : PChar; Flags : longint) : Pointer; cdecl; external 'dl';
+function dlclose( Lib : Pointer) : Longint; cdecl; external 'dl';
+function dlsym ( Lib : Pointer; Name : Pchar) : Pointer; cdecl; external 'dl';
 
 implementation
 
